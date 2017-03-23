@@ -1,5 +1,6 @@
 package engineTester;
 
+import Shaders.StaticShader;
 import org.lwjgl.opengl.Display;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
@@ -18,9 +19,10 @@ public class MainGameLoop {
     public static void main(String[] args) {
 
         DisplayManager.createDisplay();
-
         Loader loader = new Loader();
         Rendered rendered = new Rendered();
+        StaticShader staticShader = new StaticShader();
+
 
         float[] vertices = {
                 //Left bottom triangle
@@ -40,12 +42,14 @@ public class MainGameLoop {
 
         while (!Display.isCloseRequested()) {
             rendered.prepare();
+            staticShader.start();
             //game logic
             //render
             rendered.render(rawModel);
+            staticShader.stop();
             DisplayManager.updateDisplay();
         }
-
+        staticShader.cleanUp();
         loader.cleanUp();
         DisplayManager.exitDisplay();
     }
