@@ -16,11 +16,7 @@ import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Alan on 23/03/2017.
- */
-
-//Class to load 3d data onto the memeory by storing this data in a VAO
+//Class to load 3d data onto the memory by storing this data in a VAO
 public class Loader {
 
     private List<Integer> vaos = new ArrayList<>();

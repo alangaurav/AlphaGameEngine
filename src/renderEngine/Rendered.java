@@ -8,9 +8,6 @@ import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
-/**
- * Created by Alan on 23/03/2017.
- */
 public class Rendered {
 
     public void prepare() {

@@ -9,12 +9,8 @@ import models.RawModel;
 import renderEngine.Rendered;
 import textures.ModelTexture;
 
-/**
- * Created by Alan on 23/03/2017.
- */
-
 /*
-    Index buffers are used to prder the manner in which vertices are drawn, to reduce vertex data redundancy.
+    Index buffers are used to order the manner in which vertices are drawn, to reduce vertex data redundancy.
     Remember to go counter clockwise
  */
 public class MainGameLoop {
