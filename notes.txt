@@ -1,0 +1,5 @@
+Texture maps use a (u,v) co ordinate system as opposed to the (x.y) used fot layouts. This is only used as a method
+to distinguish the two. Now each model of x,y will have a mapping to u,v and this is th uv mapping used to map texture
+to models.
+
+VAO will now store 2 VBOs layout co ordinates and now texture co ordinates.

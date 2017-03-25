@@ -1,11 +1,13 @@
 package engineTester;
 
 import Shaders.StaticShader;
+import models.TexturedModel;
 import org.lwjgl.opengl.Display;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
-import renderEngine.RawModel;
+import models.RawModel;
 import renderEngine.Rendered;
+import textures.ModelTexture;
 
 /**
  * Created by Alan on 23/03/2017.
@@ -37,15 +39,23 @@ public class MainGameLoop {
                 3,1,2  //Bottom triangle
         };
 
-        RawModel rawModel = loader.loadToVAO(vertices,indices);
+        float[] textureCoords = {
+            0,0, //V0
+            0,1, //V1
+            1,1, //V2
+            1,0  //V3
+        };
 
+        RawModel rawModel = loader.loadToVAO(vertices,indices,textureCoords);
+        ModelTexture modelTexture = new ModelTexture(loader.loadTexture("rocktexture"));
+        TexturedModel texturedModel = new TexturedModel(rawModel,modelTexture);
 
         while (!Display.isCloseRequested()) {
             rendered.prepare();
             staticShader.start();
             //game logic
             //render
-            rendered.render(rawModel);
+            rendered.render(texturedModel);
             staticShader.stop();
             DisplayManager.updateDisplay();
         }
