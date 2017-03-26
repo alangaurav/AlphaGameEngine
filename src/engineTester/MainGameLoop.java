@@ -1,6 +1,9 @@
 package engineTester;
 
-import Shaders.StaticShader;
+import entities.Camera;
+import entities.Entity;
+import org.lwjgl.util.vector.Vector3f;
+import shaders.StaticShader;
 import models.TexturedModel;
 import org.lwjgl.opengl.Display;
 import renderEngine.DisplayManager;
@@ -18,8 +21,8 @@ public class MainGameLoop {
 
         DisplayManager.createDisplay();
         Loader loader = new Loader();
-        Rendered rendered = new Rendered();
         StaticShader staticShader = new StaticShader();
+        Rendered rendered = new Rendered(staticShader);
 
 
         float[] vertices = {
@@ -45,13 +48,17 @@ public class MainGameLoop {
         RawModel rawModel = loader.loadToVAO(vertices,indices,textureCoords);
         ModelTexture modelTexture = new ModelTexture(loader.loadTexture("rocktexture"));
         TexturedModel texturedModel = new TexturedModel(rawModel,modelTexture);
+        Entity entity = new Entity(texturedModel, new Vector3f(0,0,-5.0f),0,0,0,1);
+        Camera camera = new Camera();
 
         while (!Display.isCloseRequested()) {
+            //entity.increasePosition(0,0,0);
+            entity.increaseRotation(0,0,0);
+            camera.move();
             rendered.prepare();
             staticShader.start();
-            //game logic
-            //render
-            rendered.render(texturedModel);
+            staticShader.loadViewMatrix(camera);
+            rendered.render(entity,staticShader);
             staticShader.stop();
             DisplayManager.updateDisplay();
         }

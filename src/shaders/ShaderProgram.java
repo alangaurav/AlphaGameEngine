@@ -1,4 +1,4 @@
-package Shaders;
+package shaders;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
@@ -31,9 +31,12 @@ public abstract class ShaderProgram {
     }
 
     protected abstract void getAllUniformLocations();
+
+    //Get all uniform variable data from shader
     protected int getUniformLocation(String uniformName){
         return GL20.glGetUniformLocation(programID, uniformName);
     }
+
     public void start(){
         GL20.glUseProgram(programID);
     }
@@ -56,6 +59,8 @@ public abstract class ShaderProgram {
     protected void bindAttribute(int attribute, String variableName){
         GL20.glBindAttribLocation(programID, attribute, variableName);
     }
+
+    //Methods to add uniform variables to the shader code
 
      protected void loadFloat(int location, float value){
         GL20.glUniform1f(location, value);

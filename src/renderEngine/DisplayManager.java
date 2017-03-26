@@ -14,9 +14,7 @@ public class DisplayManager {
 
     public static void createDisplay() {
 
-        ContextAttribs contextAttribs = new ContextAttribs(3,2);
-        contextAttribs.withForwardCompatible(true);
-        contextAttribs.withProfileCore(true);
+        ContextAttribs contextAttribs = new ContextAttribs(3,2).withForwardCompatible(true).withProfileCore(true);
 
         try {
             //Set up height and width of display window

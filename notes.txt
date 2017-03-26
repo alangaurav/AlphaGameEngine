@@ -3,3 +3,15 @@ to distinguish the two. Now each model of x,y will have a mapping to u,v and thi
 to models.
 
 VAO will now store 2 VBOs layout co ordinates and now texture co ordinates.
+
+Uniform variables are variables in the Shader code that can be set using Java code.
+
+Entity is used to represent an instance of a textured model along with all the transformations applied to it.
+
+Integrating a projection matrix so as to allow for a more realistic feel and what not. There are essentially three
+properties that come into play when using this method, the field of view angle, near plane distance and far plane
+distance. The exact same projection matrix we have used in class is being used here again, this corresponds to
+
+
+Just like a projection matrix exists for simulating the z-axis and 3D to 2D conversions, a similar matrix known as the
+view matrix is used to simulate camera movements.
