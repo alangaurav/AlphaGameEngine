@@ -5,10 +5,10 @@ import entities.Entity;
 import entities.Light;
 import org.lwjgl.util.vector.Vector3f;
 import renderEngine.*;
-import shaders.StaticShader;
 import models.TexturedModel;
 import org.lwjgl.opengl.Display;
 import models.RawModel;
+import terrains.Terrain;
 import textures.ModelTexture;
 
 /*
@@ -21,8 +21,8 @@ public class MainGameLoop {
         DisplayManager.createDisplay();
         Loader loader = new Loader();
 
-        RawModel rawModel = OBJLoader.loadObjModel("dragon",loader);
-        TexturedModel texturedModel = new TexturedModel(rawModel,  new ModelTexture(loader.loadTexture("stallTexture")));
+        RawModel rawModel = OBJLoader.loadObjModel("tree",loader);
+        TexturedModel texturedModel = new TexturedModel(rawModel,  new ModelTexture(loader.loadTexture("tree")));
         ModelTexture texture = texturedModel.getModelTexture();
         texture.setShineDamper(10);
         texture.setReflectivity(1);
@@ -32,14 +32,20 @@ public class MainGameLoop {
         Camera camera = new Camera();
         Light light = new Light(new Vector3f(100.0f,10.0f,0), new Vector3f(1,1,1));
 
+        Terrain terrain = new Terrain(0, -1, loader, new ModelTexture(loader.loadTexture("grass")));
+        Terrain terrain2 = new Terrain(0, -1, loader, new ModelTexture(loader.loadTexture("grass")));
+
+
 
         MasterRenderer renderer = new MasterRenderer();
 
         while (!Display.isCloseRequested()) {
             //entity.increasePosition(0,0,0);
-            entity.increaseRotation(0,0.5f,0);
+            //entity.increaseRotation(0,0.5f,0);
             camera.move();
-            renderer.processEntity(entity);
+            renderer.processTerrain(terrain);
+            renderer.processTerrain(terrain2);
+            //renderer.processEntity(entity);
             renderer.render(light, camera);
             DisplayManager.updateDisplay();
         }
