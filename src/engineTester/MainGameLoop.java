@@ -4,14 +4,11 @@ import entities.Camera;
 import entities.Entity;
 import entities.Light;
 import org.lwjgl.util.vector.Vector3f;
-import renderEngine.OBJLoader;
+import renderEngine.*;
 import shaders.StaticShader;
 import models.TexturedModel;
 import org.lwjgl.opengl.Display;
-import renderEngine.DisplayManager;
-import renderEngine.Loader;
 import models.RawModel;
-import renderEngine.Rendered;
 import textures.ModelTexture;
 
 /*
@@ -23,10 +20,8 @@ public class MainGameLoop {
 
         DisplayManager.createDisplay();
         Loader loader = new Loader();
-        StaticShader staticShader = new StaticShader();
-        Rendered rendered = new Rendered(staticShader);
 
-        RawModel rawModel = OBJLoader.loadObjModel("stall",loader);
+        RawModel rawModel = OBJLoader.loadObjModel("dragon",loader);
         TexturedModel texturedModel = new TexturedModel(rawModel,  new ModelTexture(loader.loadTexture("stallTexture")));
         ModelTexture texture = texturedModel.getModelTexture();
         texture.setShineDamper(10);
@@ -38,19 +33,18 @@ public class MainGameLoop {
         Light light = new Light(new Vector3f(100.0f,10.0f,0), new Vector3f(1,1,1));
 
 
+        MasterRenderer renderer = new MasterRenderer();
+
         while (!Display.isCloseRequested()) {
             //entity.increasePosition(0,0,0);
             entity.increaseRotation(0,0.5f,0);
             camera.move();
-            rendered.prepare();
-            staticShader.start();
-            staticShader.loadLight(light);
-            staticShader.loadViewMatrix(camera);
-            rendered.render(entity,staticShader);
-            staticShader.stop();
+            renderer.processEntity(entity);
+            renderer.render(light, camera);
             DisplayManager.updateDisplay();
         }
-        staticShader.cleanUp();
+
+        renderer.cleanUp();
         loader.cleanUp();
         DisplayManager.exitDisplay();
     }
