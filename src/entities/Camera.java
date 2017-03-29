@@ -4,14 +4,10 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector3f;
 
-/**
- * Created by Alan on 26/03/2017.
- */
-
 //Virtual camera simulation
 public class Camera {
     private Vector3f position  = new Vector3f(0,0,0);
-    private float pitch; //The high or low viewing anfle of the camera
+    private float pitch; //The high or low viewing angle of the camera
     private float yaw; //The left or right viewing angle of the camera
     private float roll; // Tilt of the camera to a specific side
 
