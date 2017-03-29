@@ -3,6 +3,7 @@ package engineTester;
 import entities.Camera;
 import entities.Entity;
 import org.lwjgl.util.vector.Vector3f;
+import renderEngine.OBJLoader;
 import shaders.StaticShader;
 import models.TexturedModel;
 import org.lwjgl.opengl.Display;
@@ -24,36 +25,15 @@ public class MainGameLoop {
         StaticShader staticShader = new StaticShader();
         Rendered rendered = new Rendered(staticShader);
 
-
-        float[] vertices = {
-                //Left bottom triangle
-                -0.5f,0.5f,0,
-                -0.5f,-0.5f,0,
-                0.5f,-0.5f,0,
-                0.5f,0.5f,0
-        };
-
-        int[] indices = {
-                0,1,3, //Top triangle
-                3,1,2  //Bottom triangle
-        };
-
-        float[] textureCoords = {
-            0,0, //V0
-            0,1, //V1
-            1,1, //V2
-            1,0  //V3
-        };
-
-        RawModel rawModel = loader.loadToVAO(vertices,indices,textureCoords);
-        ModelTexture modelTexture = new ModelTexture(loader.loadTexture("rocktexture"));
+        RawModel rawModel = OBJLoader.loadObjModel("stall",loader);
+        ModelTexture modelTexture = new ModelTexture(loader.loadTexture("stallTexture"));
         TexturedModel texturedModel = new TexturedModel(rawModel,modelTexture);
-        Entity entity = new Entity(texturedModel, new Vector3f(0,0,-5.0f),0,0,0,1);
+        Entity entity = new Entity(texturedModel, new Vector3f(0,-5.0f,-30.0f),0,0,0,1);
         Camera camera = new Camera();
 
         while (!Display.isCloseRequested()) {
             //entity.increasePosition(0,0,0);
-            entity.increaseRotation(0,0,0);
+            entity.increaseRotation(0,0.5f,0);
             camera.move();
             rendered.prepare();
             staticShader.start();

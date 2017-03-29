@@ -18,7 +18,7 @@ public class Maths {
         return matrix;
     }
 
-    //Function to create a view matrix by applying all transforms in teh opposite manner
+    //Function to create a view matrix by applying all transforms in the opposite manner
     public static Matrix4f createViewMatrix(Camera camera){
         Matrix4f viewMatrix = new Matrix4f(); // Create a 4 X 4 matrix
         viewMatrix.setIdentity(); //Set it as the identity matrix
