@@ -15,3 +15,9 @@ distance. The exact same projection matrix we have used in class is being used h
 
 Just like a projection matrix exists for simulating the z-axis and 3D to 2D conversions, a similar matrix known as the
 view matrix is used to simulate camera movements.
+
+Normal vectors are used to carry out calculations for lighting directions. The angular difference between the normal at
+any point on an object and the vector pointing to the light sources determines the intensity of lighting.  This can also
+be done using the dot product of two vectors.
+
+Google swizel wrt xyz.
